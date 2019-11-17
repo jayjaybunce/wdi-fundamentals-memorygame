@@ -96,3 +96,23 @@ main{
 	width:850px;
 	margin:35px auto 35px auto;
 }
+
+
+
+#reset{
+	height: 30px;
+	width:100px;
+	font-size: 20px;
+	border-radius: 5px;
+	background-color: #0dff00;
+	color: white;
+
+}
+
+#score{
+	padding:6px;
+	font-weight: 600;
+	font-family: 'Raleway',sans-serif;
+	background-color:;
+
+}
