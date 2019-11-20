@@ -70,6 +70,11 @@ footer{
 	float:right;
 }
 
+.harder_img{
+	height:105px;
+	width: 69px;
+}
+
 .clearfix:after {
 visibility: hidden;
 display: block;
@@ -80,6 +85,11 @@ font-size: 0;
 }
 
 .name{
+	color:#F15B31;
+	font-weight: 700;
+}
+
+.extra{
 	color:#F15B31;
 	font-weight: 700;
 }
