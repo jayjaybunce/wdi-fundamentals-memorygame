@@ -75,6 +75,10 @@ footer{
 	width: 69px;
 }
 
+.harder_img_hidden{
+	display:none;
+}
+
 .clearfix:after {
 visibility: hidden;
 display: block;

@@ -84,31 +84,45 @@ var cards = [
 
 var score = 0;
 var cardsInPlay =[];
-
+var cardsMatched = [];
+var cardsIdPair = [];
 
 
 
 function softReset(){
 	for(let i =0;i < cards.length;i++){
 	let cardElement = document.getElementsByTagName('img')[i];
-	cardElement.setAttribute('src','images/back.png');
+	cardElement.setAttribute('src','images/back.png')
+	cardsInPlay = [];
+}
+
 
 }
-}
 
+function matchedCards(){
+	for(let i = 0; i<cardsIdPair.length;i++){
+		let cardElement = document.querySelector('[data-id=' + '"' +cardsIdPair[i]+'"' +']')
+		cardElement.setAttribute('class','harder_img_hidden');
+	}
+}
 
 function checkForMatch(cardId){
-	if(cardsInPlay[0] === cardsInPlay[1]){
-		score = score + 1;
-		document.getElementById('score').textContent = "Score: "+score;
-		alert("You've found a match! Great Job!");
-		return score;
 
-}	else{
-		
+		if(cardsInPlay[0] === cardsInPlay[1]){
+			score = score + 1;
+			document.getElementById('score').textContent = "Score: "+score;
+			alert("You've found a match! Great Job!");
+
+			setTimeout(softReset,1500);
+			matchedCards();
+			return score;
+
+}		else{
+			setTimeout(softReset,1500);
+			cardsIdPair = [];
+
+		}
 	}
-
-}
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -147,6 +161,7 @@ function resetBoard(){
 	cardElement.setAttribute('src','images/back.png');
 	let resetCard = document.getElementsByTagName('img')[i];
 	resetCard.setAttribute('data-id',numbers[i]);
+	resetCard.setAttribute('class','harder_img')
 	if(i === 15){		
 		return cardsInPlay = [];
 	}
@@ -159,8 +174,10 @@ function flipCard(){
 	cardsInPlay.push(cards[cardId].rank);
 	console.log("User flipped " + cards[cardId].rank +" of " + cards[cardId].suit + " located at " + "'" +cards[cardId].cardImage+"'");
 	this.setAttribute('src',cards[cardId].cardImage);
+	cardsIdPair.push(cardId)
 	if(cardsInPlay.length === 2){
 	checkForMatch(cardId);
+
 	}
 }
 
@@ -168,5 +185,6 @@ function flipCard(){
 
 
 document.getElementById('reset').addEventListener('click',resetBoard);
+
 
 createBoard();
