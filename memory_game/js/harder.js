@@ -26,7 +26,7 @@ var cards = [
 	cardImage:"images/harder_img/KC.jpg",
 },
 {
-	rank:"kind",
+	rank:"king",
 	suit:"spaces",
 	cardImage:"images/harder_img/KS.jpg",
 },
