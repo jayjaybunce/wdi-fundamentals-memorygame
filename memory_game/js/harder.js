@@ -86,8 +86,21 @@ var score = 0;
 var cardsInPlay =[];
 var cardsMatched = [];
 var cardsIdPair = [];
+var cardsInPlayIds = [];
 
 
+function createBoard(){
+	let numbers = shuffle();
+	for(let i = 0; i < cards.length ;i++){
+		let cardElement = document.createElement('img');
+		cardElement.setAttribute('src','images/back.png');
+		// let randomNum = getRandomInt(4);
+		cardElement.setAttribute('class','harder_img');
+		cardElement.setAttribute('data-id',numbers[i]);
+		cardElement.addEventListener('click',flipCard);
+		document.getElementById('game-board').appendChild(cardElement);
+	}
+}
 
 function softReset(){
 	for(let i =0;i < cards.length;i++){
@@ -108,18 +121,21 @@ function matchedCards(){
 
 function checkForMatch(cardId){
 
-		if(cardsInPlay[0] === cardsInPlay[1]){
+		if(cardsInPlay[0] === cardsInPlay[1] && cardsInPlayIds[0] != cardsInPlayIds[1]){
 			score = score + 1;
 			document.getElementById('score').textContent = "Score: "+score;
-			alert("You've found a match! Great Job!");
-
+			let cardsInPlayIds = [];
 			setTimeout(softReset,1500);
-			matchedCards();
+			setTimeout(matchedCards,1500);
+			cardsInPlayIds = [];
+			// alert("You've found a match! Great Job!");
 			return score;
+
 
 }		else{
 			setTimeout(softReset,1500);
 			cardsIdPair = [];
+			cardsInPlayIds = [];
 
 		}
 	}
@@ -130,18 +146,6 @@ function getRandomInt(max) {
 
 
 
-function createBoard(){
-	let numbers = shuffle();
-	for(let i = 0; i < cards.length ;i++){
-		let cardElement = document.createElement('img');
-		cardElement.setAttribute('src','images/back.png');
-		// let randomNum = getRandomInt(4);
-		cardElement.setAttribute('class','harder_img');
-		cardElement.setAttribute('data-id',numbers[i]);
-		cardElement.addEventListener('click',flipCard);
-		document.getElementById('game-board').appendChild(cardElement);
-	}
-}
 
 //Add reset function - resets cardsInPlay array and 'src' attribute of selevted game pieces.
 
@@ -172,6 +176,8 @@ function resetBoard(){
 function flipCard(){
 	var cardId = this.getAttribute('data-id');
 	cardsInPlay.push(cards[cardId].rank);
+	cardsInPlayIds.push(cardId);
+	console.log(cardsInPlayIds);
 	console.log("User flipped " + cards[cardId].rank +" of " + cards[cardId].suit + " located at " + "'" +cards[cardId].cardImage+"'");
 	this.setAttribute('src',cards[cardId].cardImage);
 	cardsIdPair.push(cardId)
